@@ -4,6 +4,9 @@ import android.view.View
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
+const val TABLE_SKILL = "table_skill"
+const val DB_SKILL = "db_skill"
+
 fun View.showSnackBar(
     message: String,
     anchorView: View? = null,
@@ -17,4 +20,10 @@ fun View.showSnackBar(
         if ("NA" != actionBtnText) setAction(actionBtnText) { action.invoke() }
         this.show()
     }
+}
+
+enum class SkillLevel(value: String) {
+    BEGINNER(value = "Beginner"),
+    PROFESSIONAL(value = "Professional"),
+    EXPERT(value = "Expert")
 }
