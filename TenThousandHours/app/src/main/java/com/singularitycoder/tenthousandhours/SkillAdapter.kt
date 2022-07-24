@@ -9,7 +9,7 @@ import com.singularitycoder.tenthousandhours.databinding.ListItemSkillBinding
 class SkillAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var skillList = emptyList<Skill>()
-    private var plusOneClickListener: (webPage: Skill) -> Unit = {}
+    private var plusOneClickListener: (skill: Skill) -> Unit = {}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val itemBinding = ListItemSkillBinding.inflate(LayoutInflater.from(parent.context), parent, false)
