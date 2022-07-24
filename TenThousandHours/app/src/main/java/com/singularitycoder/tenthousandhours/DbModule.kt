@@ -15,11 +15,11 @@ object DbModule {
 
     @Singleton
     @Provides
-    fun injectAudioWebRoomDatabase(@ApplicationContext context: Context): SkillDatabase {
+    fun injectSkillRoomDatabase(@ApplicationContext context: Context): SkillDatabase {
         return Room.databaseBuilder(context, SkillDatabase::class.java, DB_SKILL).build()
     }
 
     @Singleton
     @Provides
-    fun injectWebPageDao(db: SkillDatabase): SkillDao = db.skillDao()
+    fun injectSkillDao(db: SkillDatabase): SkillDao = db.skillDao()
 }
