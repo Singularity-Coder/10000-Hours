@@ -6,10 +6,10 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = TABLE_SKILL)
 data class Skill(
-    @PrimaryKey @ColumnInfo(name = "skillName") val skillName: String,
-    @ColumnInfo(name = "hours") val hours: String,
-    @ColumnInfo(name = "date") val date: String,
-    @ColumnInfo(name = "level") val level: SkillLevel
+    @PrimaryKey @ColumnInfo(name = "skillName") val name: String,
+    @ColumnInfo(name = "hours") var hours: Short,
+    @ColumnInfo(name = "date") val dateAdded: Long,
+    @ColumnInfo(name = "level") val level: String
 ) {
-    constructor() : this("", "", "", SkillLevel.BEGINNER)
+    constructor() : this("", 0, 0L, "")
 }
