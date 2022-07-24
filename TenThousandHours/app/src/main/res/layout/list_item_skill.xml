@@ -34,7 +34,7 @@
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
                 android:marqueeRepeatLimit="marquee_forever"
-                android:maxLines="1"
+                android:maxLines="3"
                 android:text="Skill Name"
                 android:textColor="@color/title_color"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
 
             <TextView
                 android:id="@+id/tv_date"
-                style="@style/TextAppearance.AppCompat.Body1"
+                style="@style/TextAppearance.AppCompat.Caption"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -90,7 +90,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_hours" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_date" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
