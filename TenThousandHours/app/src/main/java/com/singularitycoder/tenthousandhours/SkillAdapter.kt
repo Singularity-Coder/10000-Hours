@@ -24,7 +24,7 @@ class SkillAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemViewType(position: Int): Int = position
 
-    fun setPlusOneClickListener(listener: (webPage: Skill) -> Unit) {
+    fun setPlusOneClickListener(listener: (skill: Skill) -> Unit) {
         plusOneClickListener = listener
     }
 
