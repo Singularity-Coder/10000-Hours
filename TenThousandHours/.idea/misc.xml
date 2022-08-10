@@ -3,8 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/alert_dialog_bg.xml" value="0.1085" />
+        <entry key="app/src/main/res/drawable/bg_top_rounded.xml" value="0.1115" />
         <entry key="app/src/main/res/drawable/ic_round_add_24.xml" value="0.111" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.1507537688442211" />
+        <entry key="app/src/main/res/drawable/ic_round_horizontal_rule_24.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/ic_round_search_24.xml" value="0.1085" />
+        <entry key="app/src/main/res/drawable/round_remove_circle_outline_24.xml" value="0.201" />
+        <entry key="app/src/main/res/drawable/round_update_24.xml" value="0.201" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.165" />
+        <entry key="app/src/main/res/layout/fragment_menu_bottom_sheet.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/list_item_bottom_sheet.xml" value="0.335" />
         <entry key="app/src/main/res/layout/list_item_skill.xml" value="0.335" />
       </map>
     </option>
