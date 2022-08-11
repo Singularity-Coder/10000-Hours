@@ -112,7 +112,7 @@ class SkillsFragment : Fragment() {
             }
         }
         skillAdapter.setItemClickListener { it: EditText ->
-            cardAddSkillParent.isVisible = skillLevelParam == SkillLevel.BEGINNER.value
+            cardAddSkillParent.isVisible = false
             it.showKeyboard()
         }
         skillAdapter.setDismissKeyboardClickListener { it: EditText ->
