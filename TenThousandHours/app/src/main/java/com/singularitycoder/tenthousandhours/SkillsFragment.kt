@@ -6,13 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.activity.OnBackPressedCallback
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.singularitycoder.tenthousandhours.databinding.ActivityMainBinding
 import com.singularitycoder.tenthousandhours.databinding.FragmentSkillsBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
@@ -59,6 +59,8 @@ class SkillsFragment : Fragment() {
     }
 
     private fun FragmentSkillsBinding.setupUI() {
+        cardAddSkillParent.isVisible = skillLevelParam == SkillLevel.BEGINNER.value
+        etSearch.hint = "Search ${skillLevelParam?.lowercase()} skills"
         rvSkills.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = skillAdapter
@@ -86,7 +88,7 @@ class SkillsFragment : Fragment() {
                         hours in (10000 / 3)..(10000 / 2) -> SkillLevel.BEGINNER.value
                         hours in (10000 / 2)..10000 -> SkillLevel.PROFESSIONAL.value
                         hours > 10000 -> SkillLevel.EXPERT.value
-                        else -> ""
+                        else -> SkillLevel.BEGINNER.value
                     }
                 })
             }
@@ -110,11 +112,11 @@ class SkillsFragment : Fragment() {
             }
         }
         skillAdapter.setItemClickListener { it: EditText ->
-            cardAddSkillParent.isVisible = false
+            cardAddSkillParent.isVisible = skillLevelParam == SkillLevel.BEGINNER.value
             it.showKeyboard()
         }
         skillAdapter.setDismissKeyboardClickListener { it: EditText ->
-            cardAddSkillParent.isVisible = true
+            cardAddSkillParent.isVisible = skillLevelParam == SkillLevel.BEGINNER.value
             it.hideKeyboard()
         }
         skillAdapter.setApproveUpdateClickListener { it: Skill ->
@@ -142,6 +144,14 @@ class SkillsFragment : Fragment() {
                 }
             }
         }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (!isEnabled) return
+                isEnabled = false
+                cardAddSkillParent.isVisible = root.isKeyboardVisible && skillLevelParam == SkillLevel.BEGINNER.value
+                requireActivity().supportFragmentManager.popBackStackImmediate()
+            }
+        })
     }
 
     private fun observeForData() {
