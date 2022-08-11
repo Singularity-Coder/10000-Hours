@@ -96,6 +96,7 @@ class SkillAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                     clSkill.isVisible = false
                     cardUpdate.isVisible = true
                     etUpdateSkill.setText(skill.name)
+                    etUpdateSkill.setSelection(etUpdateSkill.text.length)
                     etUpdateSkill.requestFocus()
                 }
                 root.setOnLongClickListener {

@@ -25,4 +25,9 @@
         <item name="fontFamily">sans-serif</item>
         <item name="android:textColor">@color/title_color</item>
     </style>
+
+    <style name="RoundSmall" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">24dp</item>
+    </style>
 </resources>

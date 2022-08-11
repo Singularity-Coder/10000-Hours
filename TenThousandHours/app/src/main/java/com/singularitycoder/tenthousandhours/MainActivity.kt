@@ -1,10 +1,12 @@
 package com.singularitycoder.tenthousandhours
 
 import android.os.Bundle
-import android.view.WindowManager
+import android.text.Editable
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.singularitycoder.tenthousandhours.databinding.ActivityMainBinding
@@ -24,28 +26,48 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
+    private val skillAdapter = SkillAdapter()
+    private val duplicateSkillList = mutableListOf<Skill>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.setupUI()
         binding.setupUserActionListeners()
-        binding.observeForData()
+        observeForData()
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        binding.cardAddSkillParent.isVisible = binding.root.isKeyboardVisible.not()
     }
 
     private fun ActivityMainBinding.setupUI() {
         rvSkills.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
-            adapter = SkillAdapter()
+            adapter = skillAdapter
         }
     }
 
     private fun ActivityMainBinding.setupUserActionListeners() {
-        (rvSkills.adapter as SkillAdapter).setPlusOneClickListener { it: Skill ->
+        etSearch.doAfterTextChanged { keyWord: Editable? ->
+            ibClearSearch.isVisible = keyWord.isNullOrBlank().not()
+            if (keyWord.isNullOrBlank()) {
+                skillAdapter.skillList = duplicateSkillList
+            } else {
+                skillAdapter.skillList = skillAdapter.skillList.filter { it: Skill -> it.name.contains(keyWord) }
+            }
+            skillAdapter.notifyDataSetChanged()
+        }
+        ibClearSearch.setOnClickListener {
+            etSearch.setText("")
+        }
+        skillAdapter.setPlusOneClickListener { it: Skill ->
             println("hours: ${it.hours}")
             CoroutineScope(IO).launch { dao.update(it) }
         }
-        (rvSkills.adapter as SkillAdapter).setItemLongClickListener { it: Skill ->
+        skillAdapter.setItemLongClickListener { it: Skill ->
 //            val skillLongPressOptionsList = listOf(
 //                BottomSheetMenu(1, "Update skill", R.drawable.round_update_24),
 //                BottomSheetMenu(2, "Delete skill", R.drawable.round_remove_circle_outline_24),
@@ -54,7 +76,7 @@ class MainActivity : AppCompatActivity() {
             MaterialAlertDialogBuilder(this@MainActivity, com.google.android.material.R.style.ThemeOverlay_MaterialComponents_Dialog).apply {
                 setCancelable(false)
                 setTitle("Delete this skill?")
-                setMessage("Careful. You cannot undo this action!")
+                setMessage("Careful! You cannot undo this action.")
                 background = ContextCompat.getDrawable(this@MainActivity, R.drawable.alert_dialog_bg)
                 setNegativeButton("No") { dialog, which -> }
                 setPositiveButton("Yes") { dialog, which ->
@@ -63,16 +85,18 @@ class MainActivity : AppCompatActivity() {
                 show()
             }
         }
-        (rvSkills.adapter as SkillAdapter).setItemClickListener { it: EditText ->
+        skillAdapter.setItemClickListener { it: EditText ->
+            cardAddSkillParent.isVisible = false
             it.showKeyboard()
         }
-        (rvSkills.adapter as SkillAdapter).setDismissKeyboardClickListener { it: EditText ->
+        skillAdapter.setDismissKeyboardClickListener { it: EditText ->
+            cardAddSkillParent.isVisible = true
             it.hideKeyboard()
         }
-        (rvSkills.adapter as SkillAdapter).setApproveUpdateClickListener { it: Skill ->
+        skillAdapter.setApproveUpdateClickListener { it: Skill ->
             CoroutineScope(IO).launch { dao.update(it) }
         }
-        (rvSkills.adapter as SkillAdapter).setCancelUpdateClickListener { it: Skill ->
+        skillAdapter.setCancelUpdateClickListener { it: Skill ->
         }
         ibAddSkill.setOnClickListener {
             cardAddSkill.performClick()
@@ -96,10 +120,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun ActivityMainBinding.observeForData() {
+    private fun observeForData() {
         dao.getAllSkillListLiveData().observe(this@MainActivity) { it: List<Skill>? ->
-            (rvSkills.adapter as SkillAdapter).apply {
+            skillAdapter.apply {
                 skillList = it ?: emptyList()
+                duplicateSkillList.clear()
+                duplicateSkillList.addAll(skillList)
                 notifyDataSetChanged()
             }
         }

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -12,6 +13,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.WindowInsetsCompat
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
@@ -160,6 +162,15 @@ fun Activity.hideKeyboard() {
     imm.hideSoftInputFromWindow(view.windowToken, 0)
 }
 
+// https://stackoverflow.com/questions/4745988/how-do-i-detect-if-software-keyboard-is-visible-on-android-device-or-not
+val View.isKeyboardVisible: Boolean
+    get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        WindowInsetsCompat
+            .toWindowInsetsCompat(rootWindowInsets)
+            .isVisible(WindowInsetsCompat.Type.ime())
+    } else {
+        false
+    }
 
 enum class DateType(val value: String) {
     dd_MMM_yyyy(value = "dd MMM yyyy"),
