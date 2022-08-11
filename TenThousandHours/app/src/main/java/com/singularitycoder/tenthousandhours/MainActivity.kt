@@ -74,9 +74,9 @@ class MainActivity : AppCompatActivity() {
 //            )
 //            MenuBottomSheetFragment.newInstance(skillLongPressOptionsList).show(supportFragmentManager, TAG_MENU_MODAL_BOTTOM_SHEET)
             MaterialAlertDialogBuilder(this@MainActivity, com.google.android.material.R.style.ThemeOverlay_MaterialComponents_Dialog).apply {
-                setCancelable(false)
+                setCancelable(true)
                 setTitle("Delete this skill?")
-                setMessage("Careful! You cannot undo this action.")
+                setMessage(it.name)
                 background = ContextCompat.getDrawable(this@MainActivity, R.drawable.alert_dialog_bg)
                 setNegativeButton("No") { dialog, which -> }
                 setPositiveButton("Yes") { dialog, which ->
