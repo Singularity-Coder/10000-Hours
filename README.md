@@ -3,6 +3,6 @@
 Become the expert!
 
 # Screenshots
-![alt text](https://github.com/Singularity-Coder/10000-Hours/blob/main/assets/ss1.png)
-![alt text](https://github.com/Singularity-Coder/10000-Hours/blob/main/assets/ss2.png)
-![alt text](https://github.com/Singularity-Coder/10000-Hours/blob/main/assets/ss3.png)
+![alt text](https://github.com/Singularity-Coder/10000-Hours/blob/main/assets/ss4.png)
+![alt text](https://github.com/Singularity-Coder/10000-Hours/blob/main/assets/ss5.png)
+![alt text](https://github.com/Singularity-Coder/10000-Hours/blob/main/assets/ss6.png)
