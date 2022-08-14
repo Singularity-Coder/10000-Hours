@@ -7,6 +7,7 @@
         <entry key="app/src/main/res/drawable/bg_tab_indicator.xml" value="0.201" />
         <entry key="app/src/main/res/drawable/bg_top_rounded.xml" value="0.1115" />
         <entry key="app/src/main/res/drawable/ic_round_add_24.xml" value="0.111" />
+        <entry key="app/src/main/res/drawable/ic_round_cancel_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_round_horizontal_rule_24.xml" value="0.201" />
         <entry key="app/src/main/res/drawable/ic_round_search_24.xml" value="0.1085" />
         <entry key="app/src/main/res/drawable/round_remove_circle_outline_24.xml" value="0.201" />
@@ -15,6 +16,7 @@
         <entry key="app/src/main/res/layout/fragment_menu_bottom_sheet.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_skills.xml" value="0.165" />
         <entry key="app/src/main/res/layout/list_item_bottom_sheet.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/list_item_bottom_sheet_menu.xml" value="0.1" />
         <entry key="app/src/main/res/layout/list_item_skill.xml" value="0.335" />
       </map>
     </option>
